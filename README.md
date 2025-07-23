@@ -59,7 +59,7 @@ To schedule the script to run automatically every day at 1:00 AM:
 2. Add the following line:
 
     ```bash
-    0 1 * * * /home/administrator/.nvm/versions/node/v20.19.3/bin/node /absolute/path/to/your/sample.js >> /absolute/path/to/log/sample.log 2>&1
+    0 1 * * * /home/administrator/.nvm/versions/node/v20.19.3/bin/node /absolute/path/to/your/bioupdater.js >> /absolute/path/to/log/bioupdater.log 2>&1
     ```
 
 This will:
@@ -73,7 +73,7 @@ This will:
 You can manually test the script to verify everything works:
 
 ```bash
-node /absolute/path/to/your/sample.js
+node /absolute/path/to/your/bioupdater.js
 ```
 
 Check the log file or console output for any errors.
@@ -81,3 +81,11 @@ Check the log file or console output for any errors.
 ---
 
 > ✅ Replace these values in your `.env` file based on your environment.
+
+## View logs
+Type this command:
+```
+cat /absolute/path/to/log/bioupdater.log
+```
+
+---
