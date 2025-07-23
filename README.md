@@ -9,7 +9,7 @@ An automated Node.js script scheduled via cron to update employee Daily Time Rec
 ### 1. Clone the Repository
 
 ```bash
-git clone https://your-repo-url.git
+git clone [https://your-repo-url.git](https://github.com/nicoljul1997/ZKTBiometricUpdater.git)
 cd biometric-updater
 ```
 
@@ -68,21 +68,5 @@ node /absolute/path/to/your/sample.js
 Check the log file or console output for any errors.
 
 ---
-
-## 📂 Sample `.env.sample`
-
-Here is a sample `.env.sample` structure you can use:
-
-```dotenv
-# Database configuration
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=username
-DB_PASSWORD=password
-DB_NAME=biometric_db
-
-# Log path
-LOG_PATH=/var/log/biometric-updater
-```
 
 > ✅ Replace these values in your `.env` file based on your environment.
