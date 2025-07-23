@@ -9,7 +9,7 @@ An automated Node.js script scheduled via cron to update employee Daily Time Rec
 ### 1. Clone the Repository
 
 ```bash
-git clone [https://your-repo-url.git](https://github.com/nicoljul1997/ZKTBiometricUpdater.git)
+git clone https://github.com/nicoljul1997/ZKTBiometricUpdater.git
 cd biometric-updater
 ```
 
