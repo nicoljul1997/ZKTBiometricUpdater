@@ -1,34 +1,88 @@
 # BiometricUpdater
 
+An automated Node.js script scheduled via cron to update employee Daily Time Records (DTR) every day.
 
-An automated script scheduled via a cron job to update employee Daily Time Records (DTR) on a daily basis.
+---
 
+## ⚙️ Setup Instructions
 
-## Setting Up Environment Variables with Cron
-
-
-To ensure environment variables are loaded when your script runs via cron, add the following line at the top of your code:
-
+### 1. Clone the Repository
 
 ```bash
-require('dotenv').config({ path: '/path/of/your/.env', quiet: true });
+git clone https://your-repo-url.git
+cd biometric-updater
 ```
 
+### 2. Configure Environment Variables
 
-## Cron Job Setup
-
-
-Setup cron job
+Copy the example environment file and populate the necessary values:
 
 ```bash
-  crontab -e
+cp .env.sample .env
 ```
 
+Open `.env` and replace the placeholder values with your actual configuration (e.g., database credentials, API keys, etc.).
 
-Add the following line to schedule the script to run daily at 1:00 AM:
+### 3. Load `.env` File in the Script
 
+Ensure the script loads the environment variables when executed by cron. Add this line at the top of your script:
+
+```js
+require('dotenv').config({ path: '/absolute/path/to/your/.env', quiet: true });
+```
+
+> ⚠️ Use an absolute path for the `.env` file to ensure compatibility with cron.
+
+---
+
+## 🕒 Cron Job Setup
+
+To schedule the script to run automatically every day at 1:00 AM:
+
+1. Open the crontab editor:
+
+    ```bash
+    crontab -e
+    ```
+
+2. Add the following line:
+
+    ```bash
+    0 1 * * * /home/administrator/.nvm/versions/node/v20.19.3/bin/node /absolute/path/to/your/sample.js >> /absolute/path/to/log/sample.log 2>&1
+    ```
+
+This will:
+- Run the script daily at **1:00 AM**
+- Log both output and errors to the specified log file
+
+---
+
+## 🧪 Testing Your Setup
+
+You can manually test the script to verify everything works:
 
 ```bash
-0 1 * * * /home/administrator/.nvm/versions/node/v20.19.3/bin/node /path/to/the/file/sample.js >> /path/where/to/log/sample.log 2>&1
+node /absolute/path/to/your/sample.js
 ```
 
+Check the log file or console output for any errors.
+
+---
+
+## 📂 Sample `.env.sample`
+
+Here is a sample `.env.sample` structure you can use:
+
+```dotenv
+# Database configuration
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=username
+DB_PASSWORD=password
+DB_NAME=biometric_db
+
+# Log path
+LOG_PATH=/var/log/biometric-updater
+```
+
+> ✅ Replace these values in your `.env` file based on your environment.
