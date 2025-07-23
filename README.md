@@ -4,13 +4,24 @@ An automated Node.js script scheduled via cron to update employee Daily Time Rec
 
 ---
 
+## 📦 Requirements
+
+- Node.js **v20** is required.
+  
+---
+
 ## ⚙️ Setup Instructions
 
 ### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/nicoljul1997/ZKTBiometricUpdater.git
-cd biometric-updater
+cd ZKTBiometricUpdater
+```
+
+Make sure to install dependencies before running the script:
+```bash
+npm install
 ```
 
 ### 2. Configure Environment Variables
