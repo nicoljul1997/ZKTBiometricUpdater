@@ -64,8 +64,8 @@ const insertSingleRecord = (item, bioIP, bioName) => {
             if (err) return reject(err);
 
             db.query(
-                'INSERT INTO EMPLOYEETIMERECORDS (EMPLOYEENUMBER, TIMERECORD, INOUTMODE, VERIFYMODE, IPADDRESS, LOCATION ) VALUES (?, ?, ?, ?, ?, ?)',
-                [employeeID, time, inoutmode, 1, bioIP, bioName],
+                'INSERT INTO emptimerecords (EMPNUMBER, TIMERECORD, INOUTMODE, IPADDRESS, LOCATION ) VALUES (?, ?, ?, ?, ?)',
+                [employeeID, time, inoutmode, bioIP, bioName],
                 (err, result) => {
                     db.detach();
 
