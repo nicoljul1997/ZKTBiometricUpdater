@@ -1,0 +1,17 @@
+{
+  "devices": [
+    {
+      "id": "device_1",
+      "name": "Main Office",
+      "ip": "192.168.1.100",
+      "port": 4370,
+      "model": "ZK-U160",
+      "type": "zkteco",
+      "parser": "v6.60",
+      "protocol": "udp",
+      "inport": 5200,
+      "timeout": 5000,
+      "enabled": true
+    }
+  ]
+}

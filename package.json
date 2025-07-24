@@ -1,12 +1,28 @@
 {
-  "name": "bioupdater",
-  "version": "1.0.0",
-  "description": "",
+  "name": "zkt-biometric-updater",
+  "version": "2.0.0",
+  "description": "Modular and extensible biometric device synchronization application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sync:yesterday": "node index.js",
+    "sync:date": "node scripts/sync-date.js",
+    "sync:range": "node scripts/sync-range.js",
+    "sync:devices": "node scripts/sync-devices.js",
+    "test:devices": "node scripts/test-devices.js",
+    "config:generate": "node scripts/generate-config.js",
+    "config:validate": "node scripts/validate-config.js"
   },
-  "keywords": [],
+  "keywords": [
+    "biometric",
+    "attendance",
+    "zkteco",
+    "firebird",
+    "sync",
+    "time-tracking"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -14,5 +30,8 @@
     "moment": "^2.30.1",
     "node-firebird": "^1.1.9",
     "zklib": "^0.2.11"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }

@@ -1,17 +1,157 @@
-# BiometricUpdater: Automated Daily Time Record (DTR) Update Script
+# ZKT Biometric Updater (v2.0) - Modular & Extensible
 
 ## Overview
 
-The BiometricUpdater is an automated Node.js script designed to streamline the process of updating employee Daily Time Records (DTR) by integrating with biometric devices. This solution ensures that DTRs are accurately and consistently updated on a daily basis, reducing manual effort and potential discrepancies. The script is intended to be scheduled via a cron job, providing a reliable and hands-off approach to DTR management.
+The ZKT Biometric Updater is a completely refactored, modular and extensible Node.js application designed to streamline the process of updating employee Daily Time Records (DTR) by integrating with biometric devices. This solution ensures that DTRs are accurately and consistently updated on a daily basis, reducing manual effort and potential discrepancies.
+
+### 🏗️ Architecture
+
+The application follows a modular architecture with clear separation of concerns:
+
+```
+src/
+├── core/                 # Core business logic and interfaces
+│   ├── interfaces/       # Abstract interfaces
+│   ├── services/         # Core business services
+│   └── utils/           # Utility classes
+├── features/            # Feature implementations
+│   ├── database/        # Database adapters
+│   └── biometric/       # Biometric device adapters
+├── config/              # Configuration management
+└── BiometricUpdaterApp.js # Main application orchestrator
+```
+
+### ✨ Key Features
+
+- **Modular Design**: Easy to extend with new database types and biometric devices
+- **Factory Pattern**: Automatic adapter creation based on configuration
+- **Interface-Based**: Clear contracts for all adapters
+- **Comprehensive Logging**: Structured logging with configurable levels
+- **Error Handling**: Robust error handling and reporting
+- **Multiple Sync Options**: Yesterday, specific date, or date range synchronization
+- **Configuration Management**: Centralized, validated configuration
 
 
 
 
 ## 📦 Requirements
 
-To ensure the proper functioning of the BiometricUpdater script, the following prerequisite software must be installed on your system:
+To ensure the proper functioning of the ZKT Biometric Updater, the following prerequisite software must be installed on your system:
 
-- **Node.js**: Version `v20` or higher is required. You can download the latest stable version from the official Node.js website or use a version manager like `nvm` (Node Version Manager) for easier installation and management of multiple Node.js versions.
+- **Node.js**: Version `v16` or higher is required. You can download the latest stable version from the official Node.js website or use a version manager like `nvm` (Node Version Manager) for easier installation and management of multiple Node.js versions.
+
+## 🚀 Quick Start
+
+### 1. Clone and Install
+
+```bash
+git clone https://github.com/nicoljul1997/ZKTBiometricUpdater.git
+cd ZKTBiometricUpdater
+npm install
+```
+
+### 2. Configure Environment
+
+```bash
+cp .env.example .env
+# Edit .env with your database configuration
+```
+
+### 3. Configure Devices
+
+**Create devices.json file (Recommended)**
+```bash
+# Generate a devices.json file
+npm run config:generate single    # For single device
+npm run config:generate multi     # For multiple devices
+
+# Edit the generated devices.json with your device settings
+```
+
+**Alternative: Use environment variables (Legacy)**
+```bash
+# Edit .env file with device configuration (not recommended for multiple devices)
+```
+
+### 4. Validate Configuration
+
+```bash
+npm run config:validate devices.json
+```
+
+### 5. Run Synchronization
+
+```bash
+# Sync yesterday's data (default)
+npm start
+
+# Sync specific date
+npm run sync:date 2024-01-15
+
+# Sync date range
+npm run sync:range 2024-01-01 2024-01-31
+
+# Sync specific devices
+npm run sync:devices device1,device2
+
+# Test device connections
+npm run test:devices
+```
+
+## 📁 Configuration File Format
+
+The `devices.json` file uses JSON format and should contain a `devices` array:
+
+```json
+{
+  "devices": [
+    {
+      "id": "main_office",
+      "name": "Main Office Device",
+      "ip": "192.168.1.100",
+      "port": 4370,
+      "model": "ZK-U160",
+      "type": "zkteco",
+      "parser": "v6.60",
+      "protocol": "udp",
+      "inport": 5200,
+      "timeout": 5000,
+      "enabled": true
+    },
+    {
+      "id": "branch_office", 
+      "name": "Branch Office Device",
+      "ip": "192.168.1.101",
+      "port": 4370,
+      "enabled": false,
+      "notes": "Temporarily disabled"
+    }
+  ]
+}
+```
+
+### Configuration File Location
+
+The application looks for device configuration in this order:
+1. `CONFIG_FILE_PATH` environment variable
+2. `devices.json` (root directory)
+
+### Device Configuration Options
+
+| Field | Required | Default | Description |
+|-------|----------|---------|-------------|
+| `id` | Yes | - | Unique device identifier |
+| `name` | No | Same as id | Human-readable device name |
+| `ip` | Yes | - | Device IP address |
+| `port` | No | 4370 | Device port |
+| `model` | No | 'Unknown' | Device model |
+| `type` | No | 'zkteco' | Device type |
+| `parser` | No | 'v6.60' | Parser version |
+| `protocol` | No | 'udp' | Communication protocol |
+| `inport` | No | 5200 | Internal port |
+| `timeout` | No | 5000 | Connection timeout (ms) |
+| `enabled` | No | true | Whether device is active |
+| `notes` | No | - | Optional notes |
 
 
 
